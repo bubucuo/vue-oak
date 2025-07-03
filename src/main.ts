@@ -1,5 +1,6 @@
-import { createApp } from "vue";
+import { createApp, type Component } from "vue";
 import ElementPlus from "element-plus";
+import "element-plus/dist/index.css";
 import * as Icons from "@element-plus/icons-vue";
 import "./style.css";
 import App from "./App.vue";
@@ -8,9 +9,9 @@ import router from "./router";
 
 const app = createApp(App);
 
-for (let i in Icons) {
-  app.component(i, Icons[i]);
-}
+Object.entries(Icons).forEach(([key, component]) => {
+  app.component(key, component as Component);
+});
 
 app.use(createPinia()).use(router).use(ElementPlus);
 app.mount("#app");
